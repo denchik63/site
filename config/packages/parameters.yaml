@@ -1,0 +1,2 @@
+parameters:
+  api_uri: 'http://balance.test/jsonrpc/'

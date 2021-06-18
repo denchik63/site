@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="padding: 20px;">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 {{ balance != null ?: 'style="color:red;"' }}>
+                    {% if balance == null %}
+                        Balance for user with id "{{ userId }}" not found
+                    {% else %}
+                        Balance of user with id "{{ userId }}" = {{ balance }}
+                    {% endif %}
+                </h4>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <h4>History of balance</h4>
+            <div class="col-sm-12">
+                {% if histories|length %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">User id</th>
+                            <th scope="col">Value</th>
+                            <th scope="col">Balance</th>
+                            <th scope="col">Created at</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for history in histories %}
+                            <tr>
+                                <th scope="row">{{ history.id }}</th>
+                                <td>{{ history.userId }}</td>
+                                <td>{{ history.value }}</td>
+                                <td>{{ history.balance }}</td>
+                                <td>{{ history.createdAt|date('d.m.Y H:i:s') }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h4>No histories found</h4>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
